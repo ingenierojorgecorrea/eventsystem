@@ -1,0 +1,55 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "EventSystem.OrderService/1.0.0": {
+        "dependencies": {
+          "EventSystem.Shared": "1.0.0",
+          "RabbitMQ.Client": "7.1.2"
+        },
+        "runtime": {
+          "EventSystem.OrderService.dll": {}
+        }
+      },
+      "RabbitMQ.Client/7.1.2": {
+        "runtime": {
+          "lib/net8.0/RabbitMQ.Client.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.1.2.0"
+          }
+        }
+      },
+      "EventSystem.Shared/1.0.0": {
+        "runtime": {
+          "EventSystem.Shared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EventSystem.OrderService/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RabbitMQ.Client/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-y3c6ulgULScWthHw5PLM1ShHRLhxg0vCtzX/hh61gRgNecL3ZC3WoBW2HYHoXOVRqTl99Br9E7CZEytGZEsCyQ==",
+      "path": "rabbitmq.client/7.1.2",
+      "hashPath": "rabbitmq.client.7.1.2.nupkg.sha512"
+    },
+    "EventSystem.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

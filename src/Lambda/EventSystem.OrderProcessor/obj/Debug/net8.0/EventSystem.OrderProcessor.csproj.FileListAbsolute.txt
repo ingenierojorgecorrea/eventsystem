@@ -1,0 +1,17 @@
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\bin\Debug\net8.0\EventSystem.OrderProcessor.deps.json
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\bin\Debug\net8.0\EventSystem.OrderProcessor.runtimeconfig.json
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\bin\Debug\net8.0\EventSystem.OrderProcessor.dll
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\bin\Debug\net8.0\EventSystem.OrderProcessor.pdb
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\bin\Debug\net8.0\Amazon.Lambda.Core.dll
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\bin\Debug\net8.0\Amazon.Lambda.Serialization.SystemTextJson.dll
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.csproj.AssemblyReference.cache
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.GeneratedMSBuildEditorConfig.editorconfig
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.AssemblyInfoInputs.cache
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.AssemblyInfo.cs
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.csproj.CoreCompileInputs.cache
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSys.8F1A487C.Up2Date
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.dll
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\refint\EventSystem.OrderProcessor.dll
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.pdb
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\EventSystem.OrderProcessor.genruntimeconfig.cache
+C:\JORGE\ESTUDIO\NET\EventSystem\src\Lambda\EventSystem.OrderProcessor\obj\Debug\net8.0\ref\EventSystem.OrderProcessor.dll

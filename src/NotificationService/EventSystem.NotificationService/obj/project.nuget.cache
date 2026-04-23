@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "12KLeDLfEU4=",
+  "success": true,
+  "projectFilePath": "C:\\JORGE\\ESTUDIO\\NET\\EventSystem\\src\\NotificationService\\EventSystem.NotificationService\\EventSystem.NotificationService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\USUARIO\\.nuget\\packages\\awssdk.core\\3.7.400.8\\awssdk.core.3.7.400.8.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\awssdk.lambda\\3.7.401\\awssdk.lambda.3.7.401.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\rabbitmq.client\\7.1.2\\rabbitmq.client.7.1.2.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\stackexchange.redis\\2.8.24\\stackexchange.redis.2.8.24.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\system.threading.ratelimiting\\8.0.0\\system.threading.ratelimiting.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

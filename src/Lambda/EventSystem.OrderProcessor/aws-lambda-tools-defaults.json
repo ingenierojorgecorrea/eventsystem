@@ -1,0 +1,17 @@
+{
+  "Information": [
+    "Comandos útiles:",
+    "  Publicar  : dotnet lambda deploy-function",
+    "  Invocar   : dotnet lambda invoke-function eventsystem-order-processor --payload '{\"OrderId\":\"...\"}'"
+  ],
+  "profile":               "",
+  "region":                "us-east-1",
+  "configuration":         "Release",
+  "function-architecture": "x86_64",
+  "function-runtime":      "dotnet8",
+  "function-memory-size":  256,
+  "function-timeout":      30,
+  "function-name":         "eventsystem-order-processor",
+  "function-handler":      "EventSystem.OrderProcessor::EventSystem.OrderProcessor.Function::FunctionHandler",
+  "function-description":  "Calcula descuentos y genera recibos para órdenes del EventSystem"
+}

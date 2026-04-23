@@ -1,0 +1,53 @@
+version: '3.8'
+
+# ============================================================
+#  INFRAESTRUCTURA: RabbitMQ + Redis
+#  Levanta ambos servicios con: docker-compose up -d
+# ============================================================
+
+services:
+
+  # ----------------------------------------------------------
+  # RabbitMQ: Message Broker para eventos entre microservicios
+  # Puerto AMQP  : 5672  (conexión de las apps .NET)
+  # Puerto UI    : 15672 (Management UI → http://localhost:15672)
+  # Usuario/Pass : guest / guest
+  # ----------------------------------------------------------
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------------
+  # Redis: Cache distribuido para almacenar notificaciones
+  # Puerto : 6379
+  # Sin autenticación (modo desarrollo)
+  # ----------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  rabbitmq_data:
+  redis_data:

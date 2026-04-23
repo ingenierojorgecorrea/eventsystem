@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Lambda/">
+    <Project Path="src/Lambda/EventSystem.OrderProcessor/EventSystem.OrderProcessor.csproj" />
+  </Folder>
+  <Folder Name="/src/NotificationService/">
+    <Project Path="src/NotificationService/EventSystem.NotificationService/EventSystem.NotificationService.csproj" />
+  </Folder>
+  <Folder Name="/src/OrderService/">
+    <Project Path="src/OrderService/EventSystem.OrderService/EventSystem.OrderService.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/EventSystem.Shared/EventSystem.Shared.csproj" />
+  </Folder>
+</Solution>
