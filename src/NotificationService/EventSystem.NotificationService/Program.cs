@@ -29,8 +29,15 @@ builder.Services.AddScoped<INotificationService, RedisNotificationService>();
 builder.Services.AddScoped<ILambdaInvokerService, LambdaInvokerService>();
 
 // ---------------------------------------------------------------
+// AzureFunctionInvokerService: invoca la Azure Function via HTTP.
+// A diferencia de Lambda, no necesita SDK — usa HttpClient estándar.
+// ---------------------------------------------------------------
+builder.Services.AddHttpClient("AzureFunction");
+builder.Services.AddScoped<IAzureFunctionInvokerService, AzureFunctionInvokerService>();
+
+// ---------------------------------------------------------------
 // RabbitMqConsumerWorker: BackgroundService que escucha la cola
-// de RabbitMQ → guarda en Redis → invoca Lambda.
+// de RabbitMQ → Redis → AWS Lambda → Azure Function.
 // ---------------------------------------------------------------
 builder.Services.AddHostedService<RabbitMqConsumerWorker>();
 

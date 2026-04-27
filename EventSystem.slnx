@@ -1,5 +1,8 @@
 <Solution>
   <Folder Name="/src/" />
+  <Folder Name="/src/AzureFunction/">
+    <Project Path="src/AzureFunction/EventSystem.OrderValidator/EventSystem.OrderValidator.csproj" />
+  </Folder>
   <Folder Name="/src/Lambda/">
     <Project Path="src/Lambda/EventSystem.OrderProcessor/EventSystem.OrderProcessor.csproj" />
   </Folder>

@@ -130,22 +130,21 @@ docker-compose up -d
 ```
 
 Verifica que están corriendo:
+
 - RabbitMQ Management UI: http://localhost:15672 (guest/guest)
 - Redis: localhost:6379
 
 ### 2. Ejecutar OrderService (terminal 1)
 
 ```bash
-cd src/OrderService/EventSystem.OrderService
-dotnet run
+cd src/OrderService/EventSystem.OrderService && dotnet run
 # Corre en http://localhost:5001
 ```
 
 ### 3. Ejecutar NotificationService (terminal 2)
 
 ```bash
-cd src/NotificationService/EventSystem.NotificationService
-dotnet run
+cd src/NotificationService/EventSystem.NotificationService && dotnet run
 # Corre en http://localhost:5002
 ```
 
@@ -172,19 +171,19 @@ Puedes ver métricas de mensajes entrantes/procesados en tiempo real.
 
 ## Paquetes NuGet utilizados
 
-| Proyecto              | Paquete               | Rol                              |
-|-----------------------|-----------------------|----------------------------------|
-| OrderService          | RabbitMQ.Client 7.x   | Publicar mensajes AMQP           |
-| NotificationService   | RabbitMQ.Client 7.x   | Consumir mensajes AMQP           |
-| NotificationService   | StackExchange.Redis   | Cliente Redis (pool de conexiones)|
+| Proyecto            | Paquete             | Rol                                |
+| ------------------- | ------------------- | ---------------------------------- |
+| OrderService        | RabbitMQ.Client 7.x | Publicar mensajes AMQP             |
+| NotificationService | RabbitMQ.Client 7.x | Consumir mensajes AMQP             |
+| NotificationService | StackExchange.Redis | Cliente Redis (pool de conexiones) |
 
 ## Patrones aplicados
 
-| Patrón                  | Dónde                        | Por qué                              |
-|-------------------------|------------------------------|--------------------------------------|
-| Event-Driven            | RabbitMQ Exchange/Queue      | Desacopla servicios                  |
-| Publisher/Subscriber    | RabbitMqPublisher + Worker   | Comunicación asíncrona               |
-| Shared Contracts        | EventSystem.Shared           | Evita duplicar modelos de eventos    |
-| Background Service      | RabbitMqConsumerWorker       | Consumer siempre activo              |
-| Cache-Aside             | RedisNotificationService     | Persistencia rápida de notificaciones|
-| Singleton Connection    | IConnectionMultiplexer       | Pool de conexiones Redis eficiente   |
+| Patrón               | Dónde                      | Por qué                               |
+| -------------------- | -------------------------- | ------------------------------------- |
+| Event-Driven         | RabbitMQ Exchange/Queue    | Desacopla servicios                   |
+| Publisher/Subscriber | RabbitMqPublisher + Worker | Comunicación asíncrona                |
+| Shared Contracts     | EventSystem.Shared         | Evita duplicar modelos de eventos     |
+| Background Service   | RabbitMqConsumerWorker     | Consumer siempre activo               |
+| Cache-Aside          | RedisNotificationService   | Persistencia rápida de notificaciones |
+| Singleton Connection | IConnectionMultiplexer     | Pool de conexiones Redis eficiente    |

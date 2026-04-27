@@ -8,14 +8,17 @@ using EventSystem.NotificationService.Services;
 
 namespace EventSystem.NotificationService.Workers;
 
-// RabbitMqConsumerWorker es un BackgroundService (IHostedService).
-// Se ejecuta en segundo plano durante toda la vida de la aplicación.
+// RabbitMqConsumerWorker — BackgroundService que escucha la cola RabbitMQ.
 //
-// FLUJO DE CONSUMO:
+// FLUJO COMPLETO:
 //   1. Recibe OrderCreatedEvent desde RabbitMQ
-//   2. Guarda notificación en Redis  (INotificationService)
-//   3. Invoca AWS Lambda             (ILambdaInvokerService)  ← NUEVO
-//   4. Envía BasicAck a RabbitMQ
+//   2. Guarda notificación en Redis          (INotificationService)
+//   3. Invoca AWS Lambda                     (ILambdaInvokerService)
+//   4. Invoca Azure Function                 (IAzureFunctionInvokerService)
+//   5. Envía BasicAck a RabbitMQ
+//
+// Los pasos 2, 3 y 4 son independientes: si Lambda o Azure fallan,
+// el ACK se envía igual porque Redis (paso crítico) ya completó.
 public sealed class RabbitMqConsumerWorker : BackgroundService
 {
     private readonly IServiceProvider _services;
@@ -61,30 +64,53 @@ public sealed class RabbitMqConsumerWorker : BackgroundService
 
                 using var scope = _services.CreateScope();
 
-                // ── Paso 1: guardar en Redis ──────────────────────────────────
+                // ── Paso 1: Redis ─────────────────────────────────────────────
                 var notificationService = scope.ServiceProvider
                     .GetRequiredService<INotificationService>();
 
                 await notificationService.SaveAsync(@event);
-
                 _logger.LogInformation("Order {OrderId} saved to Redis", @event.OrderId);
 
-                // ── Paso 2: invocar AWS Lambda ────────────────────────────────
-                // Fire-and-result: esperamos la respuesta para logearla,
-                // pero si Lambda falla NO afecta el flujo → el ACK se envía igual.
+                // ── Paso 2: AWS Lambda ────────────────────────────────────────
                 var lambdaInvoker = scope.ServiceProvider
                     .GetRequiredService<ILambdaInvokerService>();
 
                 var receipt = await lambdaInvoker.InvokeOrderProcessorAsync(@event);
-
                 if (receipt is not null)
-                {
                     _logger.LogInformation(
-                        "Lambda processed Order {OrderId} — Final: ${FinalTotal:N2} (Discount: {Pct}%)\n{Receipt}",
-                        receipt.OrderId, receipt.FinalTotal, receipt.DiscountPct, receipt.Receipt);
+                        "Lambda → Order {OrderId} | Discount: {Pct}% | Final: ${Final:N2}\n{Receipt}",
+                        receipt.OrderId, receipt.DiscountPct, receipt.FinalTotal, receipt.Receipt);
+
+                // ── Paso 3: Azure Function ────────────────────────────────────
+                var azureInvoker = scope.ServiceProvider
+                    .GetRequiredService<IAzureFunctionInvokerService>();
+
+                var validation = await azureInvoker.ValidateOrderAsync(@event);
+                if (validation is not null)
+                {
+                    var statusIcon  = validation.IsValid ? "✅" : "❌";
+                    var errorsBlock = validation.Errors.Length > 0
+                        ? string.Join("\n", validation.Errors.Select(e => $"  • {e}"))
+                        : "  • ninguno";
+
+                    var report = $"""
+                        ============================
+                        REPORTE DE VALIDACIÓN
+                        ============================
+                        Orden   : {validation.OrderId}
+                        Estado  : {statusIcon} {validation.Status}
+                        ----------------------------
+                        Errores :
+                        {errorsBlock}
+                        ----------------------------
+                        Validado: {validation.ValidatedAt:yyyy-MM-dd HH:mm:ss} UTC
+                        ============================
+                        """;
+
+                    _logger.LogInformation("Azure Function → {Report}", report);
                 }
 
-                // ── ACK: mensaje procesado correctamente ──────────────────────
+                // ── ACK: todos los pasos completados ──────────────────────────
                 await _channel!.BasicAckAsync(ea.DeliveryTag, multiple: false);
             }
             catch (Exception ex)
